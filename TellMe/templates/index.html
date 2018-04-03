@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $(".tester").fadeOut();
+    });
+});
+</script>
+    <title>GrandPyBot</title>
+</head>
+<body>
+
+<script>  $('p').css('color', 'blue')</script>
+
+<p class="tester"> salut les amiser </p>
+
+<p> salut les amiser </p>
+
+<button>Set background-color of p</button>
+
+</body>
+</html>
