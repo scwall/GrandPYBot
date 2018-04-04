@@ -3,7 +3,6 @@ from flask import Flask, jsonify, request, render_template, Response, json
 from flask_googlemaps import GoogleMaps, Map
 from flask_classful import FlaskView, route
 from parser import Parser
-
 def create_app(config):
     app = Flask(__name__)
     app.config.from_object(config)
