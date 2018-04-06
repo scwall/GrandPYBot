@@ -1,6 +1,5 @@
-class Parser():
-
-    list_word = ["a", "abord", "absolument", "afin", "ah", "ai", "aie", "ailleurs", "ainsi", "ait", "allaient", "allo",
+{
+  "LIST_WORD": ["salut","a", "abord", "absolument", "afin", "ah", "ai", "aie", "ailleurs", "ainsi", "ait", "allaient", "allo",
             "allons", "allô", "alors", "anterieur", "anterieure", "anterieures", "apres", "après", "as", "assez",
             "attendu", "au", "aucun", "aucune", "aujourd", "aujourd'hui", "aupres", "auquel", "aura", "auraient",
             "aurait", "auront", "aussi", "autre", "autrefois", "autrement", "autres", "autrui", "aux", "auxquelles",
@@ -11,7 +10,7 @@ class Parser():
             "cette", "ceux", "ceux-ci", "ceux-là", "chacun", "chacune", "chaque", "cher", "chers", "chez", "chiche",
             "chut", "chère", "chères", "ci", "cinq", "cinquantaine", "cinquante", "cinquantième", "cinquième", "clac",
             "clic", "combien", "comme", "comment", "comparable", "comparables", "compris", "concernant", "contre",
-            "couic", "crac", "d", "da", "dans", "de", "debout", "dedans", "dehors", "deja", "delà", "depuis", "dernier",
+            "couic", "crac", "da", "dans", "de", "debout", "dedans", "dehors", "deja", "delà", "depuis", "dernier",
             "derniere", "derriere", "derrière", "des", "desormais", "desquelles", "desquels", "dessous", "dessus",
             "deux", "deuxième", "deuxièmement", "devant", "devers", "devra", "different", "differentes", "differents",
             "différent", "différente", "différentes", "différents", "dire", "directe", "directement", "dit", "dite",
@@ -55,23 +54,6 @@ class Parser():
             "unique", "uniques", "uns", "v", "va", "vais", "vas", "vers", "via", "vif", "vifs", "vingt", "vivat",
             "vive", "vives", "vlan", "voici", "voilà", "vont", "vos", "votre", "vous", "vous-mêmes", "vu", "vé",
             "vôtre", "vôtres", "w", "x", "y", "z", "zut", "à", "â", "ça", "ès", "étaient", "étais", "était", "étant",
-            "été", "être", "ô"]
-
-    @classmethod
-    def parser(cls, text):
-            text_list = text.split()
-            for word in text_list:
-                if "'" not in word:
-                    if word in cls.list_word:
-                        text_list.remove(word)
-                else:
-                    word2 = word.split("'")
-                    for word3 in word2:
-                        if word3 in cls.list_word:
-                            if word in text_list:
-                                text_list.remove(word)
-
-            return " ".join(text_list)
-
-
-
+            "été", "être", "ô","connais","grandpy"],
+  "LIST_CARACTER" : ["!","?","'","-",",",".",";",":","/","\\","<",">","~","#"]
+}

@@ -1,13 +1,12 @@
-
-import pytest
-import sys
-from flask import url_for, json
-from parser import Parser
+from flask import json
+from bin.Parser.parser import Parser
 import urllib3
 import logging
 logging.basicConfig(format='%(message)s')
 http = urllib3.PoolManager()
 
+def fuction(numb1,numb2):
+    return numb1 * numb2
 
 class TestApp:
 
@@ -26,11 +25,14 @@ class TestApp:
             'Accept': mimetype
         }
         data = {
-            'grandfather_question': "raconte moi l'histoire de la rue de liege 20 verviers"
+            'grandfather_question': "Salut GrandPy ! Est-ce que tu connais l'adresse d'OpenClassrooms ?"
         }
         url = '/question'
 
         response = client.post(url, data=json.dumps(data), headers=headers)
         assert response.content_type == mimetype
-        assert response.json == "raconte l'histoire la rue liege 20 verviers"
+        assert response.json['googlemaps'] == ""
+        assert response.json['history'] == ""
+    def test_class_TellMe(self):
+        pass
 
