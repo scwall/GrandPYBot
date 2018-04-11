@@ -1,5 +1,7 @@
 import googlemaps
-import wikipediaapi
+import requests
+from flask import json
+
 from bin.Parser.parser import Parser
 
 
@@ -7,41 +9,39 @@ class TellMe:
     def __init__(self, googlemapapikey):
         self._googlemaps_result = dict()
         self._googlemaps_formatted_address = str()
+        self._googlemaps_geocode_result = dict()
         self._wikipedia_result = dict()
         self._question = str()
         self.gmaps = googlemaps.Client(key=googlemapapikey)
         self.parser = Parser(language='fr')
+        self.wikipedia_link_get = "https://fr.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&" \
+                                  "list=&generator=geosearch&utf8=1&exsentences=4&exintro=1&explaintext=1&" \
+                                  "exsectionformat=raw&ggscoord={coordinates}"
+
     def google_map(self):
         test_correct = False
         while test_correct is False:
             geocode_result = self.gmaps.geocode(self._question)
-            print(self._question)
             self._googlemaps_formatted_address = self.parser.parser_number(geocode_result[0]['formatted_address'])
-            return geocode_result[0]['geometry']['location']
+            self._googlemaps_geocode_result = geocode_result[0]['geometry']['location']
+            test_correct = True
+        return self._googlemaps_geocode_result
 
     def wikipedia(self):
-        wiki_wiki = wikipediaapi.Wikipedia('fr')
-        try_research = False
-        while try_research is False:
-            self._wikipedia_result = wiki_wiki.page(self._googlemaps_formatted_address)
-            try_research = self._wikipedia_result.exists()
-            self._googlemaps_formatted_address = self.parser.parser_refine(self._googlemaps_formatted_address,method='reverse')
-
-
-        return self._wikipedia_result
+        reply = requests.get(self.wikipedia_link_get.format(
+            coordinates=str(self._googlemaps_geocode_result['lat']) + "|" + str(
+                self._googlemaps_geocode_result['lng'])))
+        reply = reply.json()
+        self.reply = reply
+        key = str(next(iter(self.reply['query']['pages'])))
+        return self.reply['query']['pages'][key]['extract']
 
     def set_question(self, question):
-        
         self._question = self.parser.parser_word(question)
 
 
-
-
-#parser = Parser('fr')
-#question2 = parser.parser_word(question)
-#print(question2)
 tellme = TellMe("AIzaSyC_0sMqi7mbdoquIuAX8_GpyRuGrNu88qI")
 
-tellme.set_question(question)
-
-tellme.wikipedia()
+tellme.set_question("openclassrooms ")
+print(tellme.google_map())
+print(tellme.wikipedia())

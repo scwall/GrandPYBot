@@ -1,5 +1,4 @@
 [
-  "test_tellme.py::TestApp::()::test_page_index",
   "test_tellme.py::TestApp::()::test_parser",
   "test_tellme.py::TestApp::()::test_question",
   "test_tellme.py::TestApp::()::test_class_TellMe"

@@ -14,7 +14,7 @@ def create_app(config):
         @route('question', methods=["POST"])
         def question(self):
             self.question = request.get_json().get('grandfather_question')
-            self.question = Parser.parser_word(self.question)
+
             return jsonify(self.question)
 
     MainView.register(app, route_base='/')

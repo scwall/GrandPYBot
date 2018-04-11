@@ -2,8 +2,7 @@
   "connection_test.py::TestApp::()::test_ping": true,
   "connection_test.py::test_myview": true,
   "test_tellme.py::TestApp::()::test_arg": true,
+  "test_tellme.py::TestApp::()::test_class_TellMe": true,
   "test_tellme.py::TestApp::()::test_json": true,
-  "test_tellme.py::TestApp::()::test_parser": true,
-  "test_tellme.py::TestApp::()::test_question": true,
   "test_tellme.py::TestApp::()::test_world": true
 }
