@@ -18,18 +18,21 @@ class TestApp:
             'Accept': mimetype
         }
         data = {
-            'grandfather_question': "Salut GrandPy ! Est-ce que tu connais l'adresse d'OpenClassrooms ?"
+            'grandfather_question': "OpenClassrooms "
         }
         url = '/question'
 
         response = client.post(url, data=json.dumps(data), headers=headers)
         assert response.content_type == mimetype
-        #assert response.json['googlemaps'] == ""
-        #assert response.json['history'] == ""
+        assert response.json['googlemaps_result'] == {'lat': 48.8747578, 'lng': 2.350564700000001}
+        assert response.json['wikipedia_result'] == "La rue d’Hauteville est une voie publique située dans le 10e arrondissement de Paris."
+        assert response.json['correct_question'] == True
     def test_class_TellMe(self):
         question = "openclassrooms"
         tellme = TellMe("AIzaSyC_0sMqi7mbdoquIuAX8_GpyRuGrNu88qI")
         tellme.set_question(question)
-        assert tellme.google_map() == {'lat': 48.8747578, 'lng': 2.350564700000001}
-        assert tellme.wikipedia() == 'La rue d’Hauteville est une voie publique située dans le 10e arrondissement de Paris.'
+        tellme.google_map()
+        tellme.wikipedia()
+        assert tellme.get_googlemaps_geocode_result() == {'lat': 48.8747578, 'lng': 2.350564700000001}
+        assert tellme.get_wikipedia_result() == 'La rue d’Hauteville est une voie publique située dans le 10e arrondissement de Paris.'
 
