@@ -7,8 +7,9 @@ from bin.Parser.parser import Parser
 def create_app(config):
     app = Flask(__name__)
     app.config.from_object(config)
-
+    tellme = TellMe("AIzaSyC_0sMqi7mbdoquIuAX8_GpyRuGrNu88qI")
     class MainView(FlaskView):
+
         @route('/')
         def index(self):
             return render_template('index.html')
@@ -17,8 +18,6 @@ def create_app(config):
         def question(self):
             self.response = dict()
             self.question = request.get_json().get('grandfather_question')
-            tellme = TellMe("AIzaSyC_0sMqi7mbdoquIuAX8_GpyRuGrNu88qI")
-
             tellme.set_question(self.question)
             tellme.google_map()
             if tellme.google_map() is False:

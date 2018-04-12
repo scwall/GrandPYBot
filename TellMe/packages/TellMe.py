@@ -26,9 +26,11 @@ class TellMe:
             return False
 
     def wikipedia(self):
+
         reply = requests.get(self.wikipedia_link_get.format(
             coordinates=str(self._googlemaps_geocode_result['lat']) + "|" + str(
                 self._googlemaps_geocode_result['lng'])))
+
         reply = reply.json()
         key = str(next(iter(reply['query']['pages'])))
         self._wikipedia_result = reply['query']['pages'][key]['extract']
@@ -41,4 +43,3 @@ class TellMe:
 
     def get_wikipedia_result(self):
         return self._wikipedia_result
-
