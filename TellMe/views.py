@@ -1,13 +1,14 @@
 from flask import Flask, jsonify, request, render_template
-from flask_googlemaps import GoogleMaps
 from flask_classful import FlaskView, route
 
 from TellMe.packages.TellMe import TellMe
-from bin.Parser.parser import Parser
+
+
 def create_app(config):
     app = Flask(__name__)
     app.config.from_object(config)
     tellme = TellMe("AIzaSyC_0sMqi7mbdoquIuAX8_GpyRuGrNu88qI")
+
     class MainView(FlaskView):
 
         @route('/')
@@ -19,8 +20,9 @@ def create_app(config):
             self.response = dict()
             self.question = request.get_json().get('grandfather_question')
             tellme.set_question(self.question)
-            tellme.google_map()
-            if tellme.google_map() is False:
+            self.question_is_correct = tellme.google_map()
+            print(self.question_is_correct)
+            if self.question_is_correct is False:
                 self.response['correct_question'] = False
             else:
                 tellme.wikipedia()
@@ -33,6 +35,6 @@ def create_app(config):
     return app
 
 
+app = create_app('config')
 if __name__ == '__main__':
-    app = create_app('config')
     app.run()

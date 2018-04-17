@@ -22,7 +22,9 @@ class TellMe:
         try:
             geocode_result = self.gmaps.geocode(self._question)
             self._googlemaps_geocode_result = geocode_result[0]['geometry']['location']
+            print(self._googlemaps_geocode_result)
         except:
+            print('test')
             return False
 
     def wikipedia(self):
@@ -32,6 +34,7 @@ class TellMe:
                 self._googlemaps_geocode_result['lng'])))
 
         reply = reply.json()
+
         key = str(next(iter(reply['query']['pages'])))
         self._wikipedia_result = reply['query']['pages'][key]['extract']
 

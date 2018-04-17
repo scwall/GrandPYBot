@@ -2,73 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_0sMqi7mbdoquIuAX8_GpyRuGrNu88qI&callback=initMap">
-    </script>
-<script>
-    $(function() {
-    var $question_papy;
-    $question_papy = $('#questionpapy');
-    $question_papy.on('submit', function (e) {
-            e.preventDefault();
-         var text = $('input:text').val();
-         $(".tester").after(text);
-    });
-    });
+    <script src="{{ url_for('static', filename='javascript/post.question.grandpy.js') }}"
+            type="text/javascript"></script>
 
-    // $(document).ready(function(){
-    //     $("#testing").click(function(){
-    //         $(".tester").after('test');
-    //     });
-    // });
-</script>
 
     <title>GrandPyBot</title>
 </head>
 <body>
-<p class="tester"> salut les amiser </p>
-<script>  $('p').css('color', 'blue')</script>
-<button id="affichemap"> test affiche map</button>
-<div id="map" style="display: none"></div>
-<script>
 
-
-
-
-      function initMap(long,lat) {
-        var uluru = new google.maps.LatLng(long, lat);
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
-      $(function() {
-    $('#affichemap').on('click',function(){
-        $( "#map" ).show( "slow" );
-    initMap(39.305, -76.617);
-
-    });
-});
-    </script>
-<script>
-</script>
-
-<p> salut les amiser 2 </p>
-
-<button>Set background-color of p</button>
-<div id="newItemButton">
-    <button id="testing" href="#">new item</button>
-    <form id="questionpapy">
-        <label for="test"> le test</label>
-    <input type="text" id="test" />
-    <input type="submit" id="add" value="adduser" />
-    </form>
-</div>
 </body>
 </html>

@@ -1,14 +1,25 @@
+import logging as lg
+
 from flask_sqlalchemy import SQLAlchemy
+
 from TellMe.views import app
-db = SQLAlchemy(app)
 
-class Content(db.Model):
+db = SQLAlchemy()
+
+
+class ResponseGrandPy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.String(200), nullable=False)
-    gender = db.Column(db.Integer(), nullable=False)
+    standard_phrase = db.Column(db.String(200), nullable=False)
 
-    def __init__(self, description, gender):
-        self.description = description
-        self.gender = gender
+    def __init__(self, standard_phrase):
+        self.standard_phrase = standard_phrase
 
-db.create_all()
+
+@app.cli.command()
+def init_db():
+    db.drop_all()
+    db.create_all()
+    db.session.add(ResponseGrandPy("PARLE PLUS FORT ! Je n'ai pas compris la question "))
+    db.session.add(ResponseGrandPy("huh, je vais te raconter une histoire à propos de cette endroit "))
+    db.session.commit()
+    lg.warning('Database initialized!')
