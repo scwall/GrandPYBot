@@ -3,7 +3,7 @@ $(function () {
     $question_papy = $('#questionpapy');
     $question_papy.on('submit', function (e) {
         e.preventDefault();
-        var text = $('input:text').val();
+        var text = $('#patate').val();
         $.ajax({
             url: 'question',
             type: 'POST',
@@ -17,7 +17,7 @@ $(function () {
         });
 
     });
-});
-$(function () {
     console.log("ready!");
 });
+
+
