@@ -29,9 +29,7 @@ def init_db():
 
 @app.route('/')
 def index():
-    loadsite = models.LoadSiteResponseGrandPy.query.filter_by(id=random.randrange(1, 4)).first()
-
-    return render_template('index.html', loadsite=loadsite.load_phrase_response)
+    return render_template('index.html')
 
 
 @app.route('/question', methods=["POST"])
@@ -50,6 +48,14 @@ def question():
         response['wikipedia_result'] = tellme.get_wikipedia_result()
     return jsonify(response)
 
+
+@app.route('/loadsite', methods=["POST"])
+def loadsite():
+    loadsite = ''
+    response = request.get_json().get('loadsite')
+    if response == 'start':
+        loadsite = models.LoadSiteResponseGrandPy.query.filter_by(id=random.randrange(1, 4)).first()
+    return jsonify({'randomResponse': loadsite.load_phrase_response})
 
 if __name__ == '__main__':
     app.run()
