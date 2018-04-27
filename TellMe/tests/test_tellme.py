@@ -1,7 +1,6 @@
 from flask import json
-from flask import Flask
-from TellMe.packages.TellMe import TellMe
-from bin.Parser.parser import Parser
+from TellMe.packages.questionSearch import TellMe
+from TellMe.packages.parser import Parser
 
 
 

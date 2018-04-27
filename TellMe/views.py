@@ -1,8 +1,9 @@
 from flask import Flask, jsonify, request, render_template
-from TellMe.packages.TellMe import TellMe
+from TellMe.packages.questionSearch import TellMe
 from TellMe import models
 import logging as lg
 import random
+
 
 def create_app(config):
     app = Flask(__name__)
@@ -20,9 +21,11 @@ app.app_context().push()
 def init_db():
     models.db.drop_all()
     models.db.create_all()
-    models.db.session.add(models.ResponseGrandPy("PARLE PLUS FORT ! Je n'ai pas compris la question "))
-    models.db.session.add(models.ResponseGrandPy("huh, je vais te raconter une histoire à propos de cette endroit "))
-    models.db.session.add(models.LoadSiteResponseGrandPy("MMMM bienvenue chère utilisateur, pose moi une question"))
+    models.db.session.add(models.ResponseGrandPy("huh, je vais te raconter une histoire "))
+    models.db.session.add(models.ResponseGrandPy("je vais te compter une histoire de mon souvenir "))
+    models.db.session.add(models.LoadSiteResponseGrandPy("Pose moi une question"))
+    models.db.session.add(models.LoadSiteResponseGrandPy("je suis à ton écoute"))
+    models.db.session.add(models.ResponseGrandPyError("PARLE PLUS FORT ! Je n'ai pas compris la question "))
     models.db.session.commit()
     lg.warning('Database initialized!')
 
@@ -51,11 +54,17 @@ def question():
 
 @app.route('/loadsite', methods=["POST"])
 def loadsite():
-    loadsite = ''
+    load_site = str()
+    random_response = str()
     response = request.get_json().get('loadsite')
     if response == 'start':
-        loadsite = models.LoadSiteResponseGrandPy.query.filter_by(id=random.randrange(1, 4)).first()
-    return jsonify({'randomResponse': loadsite.load_phrase_response})
+        load_site = models.LoadSiteResponseGrandPy.query.filter_by(
+            id=random.randrange(1, (models.LoadSiteResponseGrandPy.query.count() + 1))).first()
+        random_response = models.ResponseGrandPy.query.filter_by(
+            id=random.randrange(1, (models.ResponseGrandPy.query.count() + 1))).first()
+    return jsonify(
+        {'randomHello': load_site.load_phrase_response, 'randomResponse': random_response.standard_phrase_response})
+
 
 if __name__ == '__main__':
     app.run()

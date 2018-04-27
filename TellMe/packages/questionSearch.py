@@ -1,7 +1,7 @@
 import googlemaps
 import requests
 
-from bin.Parser.parser import Parser
+from TellMe.packages.parser import Parser
 
 
 class TellMe:
@@ -16,7 +16,9 @@ class TellMe:
         self.wikipedia_link_get = "https://fr.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&" \
                                   "list=&generator=geosearch&utf8=1&exsentences=4&exintro=1&explaintext=1&" \
                                   "exsectionformat=raw&ggscoord={coordinates}"
-
+        self.wikipedia_link_get_long_range = "https://fr.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&" \
+                                             "generator=geosearch&utf8=1&exsentences=4&exintro=1&explaintext=1" \
+                                             "&ggscoord={coordinates}&ggsradius=10000&ggsglobe=earth"
 
     def google_map(self):
         try:
@@ -24,7 +26,6 @@ class TellMe:
             self._googlemaps_geocode_result = geocode_result[0]['geometry']['location']
             print(self._googlemaps_geocode_result)
         except:
-            print('test')
             return False
 
     def wikipedia(self):
@@ -32,11 +33,18 @@ class TellMe:
         reply = requests.get(self.wikipedia_link_get.format(
             coordinates=str(self._googlemaps_geocode_result['lat']) + "|" + str(
                 self._googlemaps_geocode_result['lng'])))
-
         reply = reply.json()
-
-        key = str(next(iter(reply['query']['pages'])))
-        self._wikipedia_result = reply['query']['pages'][key]['extract']
+        print(reply.keys())
+        if next(iter(reply.keys())) == 'batchcomplete':
+            reply = requests.get(self.wikipedia_link_get_long_range.format(
+                coordinates=str(self._googlemaps_geocode_result['lat']) + "|" + str(
+                    self._googlemaps_geocode_result['lng'])))
+            reply = reply.json()
+            key = str(next(iter(reply['query']['pages'])))
+            self._wikipedia_result = reply['query']['pages'][key]['extract']
+        else:
+            key = str(next(iter(reply['query']['pages'])))
+            self._wikipedia_result = reply['query']['pages'][key]['extract']
 
     def set_question(self, question):
         self._question = self.parser.parser_word(question)
@@ -46,3 +54,10 @@ class TellMe:
 
     def get_wikipedia_result(self):
         return self._wikipedia_result
+
+# tellme = TellMe("AIzaSyC_0sMqi7mbdoquIuAX8_GpyRuGrNu88qI")
+# tellme.set_question("ffs")
+#
+# question_is_correct = tellme.google_map()
+# print(tellme.get_wikipedia_result())
+# print(question_is_correct)
