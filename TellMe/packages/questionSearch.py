@@ -3,6 +3,11 @@ import requests
 
 from TellMe.packages.parser import Parser
 
+"""
+The TelleMe class will allow the search for coordinates on googlemaps after the question is passed to the text parser, 
+the coordinates can then be sent to wikipedia for a search on an area known to it. 
+The construction of the object will take as parameter in the constructor the googlemaps key
+"""
 
 class TellMe:
     def __init__(self, googlemapapikey):
@@ -20,6 +25,10 @@ class TellMe:
                                              "generator=geosearch&utf8=1&exsentences=4&exintro=1&explaintext=1" \
                                              "&ggscoord={coordinates}&ggsradius=10000&ggsglobe=earth"
 
+    """
+    Function that will allow the search of the location on googlemaps, 
+    if there is no information found it returns false
+    """
     def google_map(self):
         try:
             geocode_result = self.gmaps.geocode(self._question)
@@ -28,13 +37,16 @@ class TellMe:
         except:
             return False
 
+    """
+    Function that will search on wikipedia according to the coordinates received from googlemaps
+    If the coordinates do not give a history on the place then it is returned on a longer search range
+    """
     def wikipedia(self):
 
         reply = requests.get(self.wikipedia_link_get.format(
             coordinates=str(self._googlemaps_geocode_result['lat']) + "|" + str(
                 self._googlemaps_geocode_result['lng'])))
         reply = reply.json()
-        print(reply.keys())
         if next(iter(reply.keys())) == 'batchcomplete':
             reply = requests.get(self.wikipedia_link_get_long_range.format(
                 coordinates=str(self._googlemaps_geocode_result['lat']) + "|" + str(
@@ -54,10 +66,3 @@ class TellMe:
 
     def get_wikipedia_result(self):
         return self._wikipedia_result
-
-# tellme = TellMe("AIzaSyC_0sMqi7mbdoquIuAX8_GpyRuGrNu88qI")
-# tellme.set_question("ffs")
-#
-# question_is_correct = tellme.google_map()
-# print(tellme.get_wikipedia_result())
-# print(question_is_correct)

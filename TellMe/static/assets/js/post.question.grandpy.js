@@ -11,7 +11,9 @@ $(function () {
         var response;
         var text = $('#question').val();
         if (finishGrandPyWrite === true) {
-            $("#chatBox").append("Me : " + text + "</br>").scrollBottom();
+            var chatbox = $("#chatBox");
+
+            chatbox.append("Me : " + text + "</br>").scrollBottom();
             finishGrandPyWrite = false;
             $.ajax({
                 url: 'question',
@@ -38,10 +40,10 @@ $(function () {
                 }
 
             });
-            $("#chatBox").append("<span id='tempory" + numberLineText + "'>" + "GrandPYBot : En train de réfléchir " + "<img src='../static/assets/img/Eclipse-1s-200px.svg' height='30' width='30'>" + "</span>").scrollBottom().delay(3000).queue(function () {
+            chatbox.append("<span id='tempory" + numberLineText + "'>" + "GrandPYBot : En train de réfléchir " + "<img src='../static/assets/img/Eclipse-1s-200px.svg' height='30' width='30'>" + "</span>").scrollBottom().delay(3000).queue(function () {
                 $('#tempory' + numberLineText).last().remove();
                 if (response.correct_question === true) {
-                    $("#chatBox").append("<span id='response" + numberLineText + "'>" + "</span>" + "</br>").scrollBottom();
+                    chatbox.append("<span id='response" + numberLineText + "'>" + "</span>" + "</br>").scrollBottom();
                     typed = new Typed('#response' + numberLineText, {
                         strings: ["GrandPYBot : " + randomResponse],
                         typeSpeed: 40,
@@ -55,19 +57,20 @@ $(function () {
                         },
                         onComplete: function (array, self) {
                             finishGrandPyWrite = true;
+                            var responseQuestion = $('#responseQuestion');
                             $('#googlemaps').show('slow');
-                            $('#responseQuestion').show('slow');
-                            $('#responseQuestion').text(response.wikipedia_result);
+                            responseQuestion.show('slow');
+                            responseQuestion.text(response.wikipedia_result);
                             map.setZoom(16);
                             map.setCenter({lat: response.googlemaps_result.lat, lng: response.googlemaps_result.lng});
-                            $("#chatBox").clearQueue().finish();
+                            chatbox.clearQueue().finish();
                             numberLineText += 1;
                         },
                         loop: false
                     });
                 }
                 if (response.correct_question === false) {
-                    $("#chatBox").append("<span id='response" + numberLineText + "'>" + "</span>" + "</br>").scrollBottom();
+                    chatbox.append("<span id='response" + numberLineText + "'>" + "</span>" + "</br>").scrollBottom();
                     typed = new Typed('#response' + numberLineText, {
                         strings: ["GrandPYBot : Je n'ai pas compris la question, peux tu répéter"],
                         typeSpeed: 40,
@@ -82,7 +85,7 @@ $(function () {
                         onComplete: function (array, self) {
                             finishGrandPyWrite = true;
 
-                            $("#chatBox").clearQueue().finish();
+                            chatbox.clearQueue().finish();
                             numberLineText += 1;
                         },
                         loop: false

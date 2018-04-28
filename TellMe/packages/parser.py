@@ -3,6 +3,12 @@ import re
 import unidecode
 from flask import json
 
+"""
+The parser class takes as parameter for the construction of the object the text language 
+which will be parser which will be parser. Example : Parser = Parser('fr'). 
+Languages can be found and created in the same folder as the package. 
+"""
+
 
 class Parser:
     def __init__(self, language):
@@ -11,7 +17,9 @@ class Parser:
         words_and_caracters = json.load(open(self.language))
         self.LIST_WORD = words_and_caracters["LIST_WORD"]
 
+    # Function that will parse the text
     def parser_word(self, text):
+
         text_list = unidecode.unidecode(text.lower())
         text_list = re.split(r"[^a-zA-Z0-9]", text_list)
         number_list_word = 0
@@ -29,21 +37,4 @@ class Parser:
                 number_list_word += 1
             else:
                 word_is_remove = False
-        return " ".join(text_list)
-
-    @staticmethod
-    def parser_refine(text, method=None):
-        if method is 'reverse':
-            text_list = text.lower().split()
-            text_list.pop(-1)
-        else:
-            text_list = text.lower().split()
-            text_list.pop(0)
-
-        return " ".join(text_list)
-
-    @staticmethod
-    def parser_number(text):
-        text_list = unidecode.unidecode(text.lower())
-        text_list = re.split('[^a-zA-Z]', text_list)
         return " ".join(text_list)

@@ -1,4 +1,5 @@
 var randomResponse;
+var randomError;
 var keystrokeSound = new Audio('https://vocaroo.com/media_command.php?media=s1mhvLTNIFaW&command=download_mp3');
 
 function playSound() {
@@ -21,6 +22,7 @@ $(window).on('load', function () {
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             randomResponse = data.randomResponse;
+            randomError = data.randomError;
             typed = new Typed('#chatBox', {
                 strings: ['GrandPyBot : Bienvenue cher utilisateur', 'GrandPyBot : ' + data.randomHello + '</br>'],
                 typeSpeed: 40,
