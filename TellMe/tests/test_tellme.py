@@ -3,7 +3,6 @@ from TellMe.packages.questionSearch import TellMe
 from TellMe.packages.parser import Parser
 
 
-
 class TestApp:
 
     def test_parser(self):
@@ -11,7 +10,7 @@ class TestApp:
         assert parser.parser_word("c'est un test") == "test"
 
     def test_question(self,client):
-        mimetype = 'text/html'
+        mimetype = 'application/json'
         headers = {
             'Content-Type': mimetype,
             'Accept': mimetype
