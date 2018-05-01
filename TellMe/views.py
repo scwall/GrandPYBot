@@ -22,7 +22,7 @@ def init_db():
     models.db.drop_all()
     models.db.create_all()
     models.db.session.add(
-        models.ResponseGrandPy("Voici le lieu, huh, je vais te raconter une histoire sur cette endrois "))
+        models.ResponseGrandPy("Voici le lieu, huh, je vais te raconter une histoire sur cette endroit "))
     models.db.session.add(models.ResponseGrandPy("Voici le lieu,je vais te compter une histoire de mon souvenir "))
     models.db.session.add(models.LoadSiteResponseGrandPy("Pose moi une question"))
     models.db.session.add(models.LoadSiteResponseGrandPy("Je suis à ton écoute"))
