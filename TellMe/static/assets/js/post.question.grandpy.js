@@ -12,8 +12,8 @@ $(function () {
         var text = $('#question').val();
         if (finishGrandPyWrite === true) {
             var chatbox = $("#chatBox");
-
-            chatbox.append("Me : " + text + "</br>").scrollBottom();
+            chatbox.append("<img src='../static/assets/img/avatar.png' height='30' width='30'>" + "<span id='question" + numberLineText + "'>" + "</span>" + "</br>").scrollBottom();
+            $('#question' + numberLineText).append("Moi : " + text + "</br>");
             finishGrandPyWrite = false;
             $.ajax({
                 url: 'question',
@@ -43,7 +43,7 @@ $(function () {
             chatbox.append("<span id='tempory" + numberLineText + "'>" + "<img src='../static/assets/img/dimitri.png' height='30' width='30'>" + "GrandPYBot : En train de réfléchir " + "<img src='../static/assets/img/Eclipse-1s-200px.svg' height='30' width='30'>" + "</span>").scrollBottom().delay(3000).queue(function () {
                 $('#tempory' + numberLineText).last().remove();
                 if (response.correct_question === true) {
-                    chatbox.append("<span id='response" + numberLineText + "'>" + "</span>" + "</br>").scrollBottom();
+                    chatbox.append("<img src='../static/assets/img/dimitri.png' height='30' width='30'>" + "<span id='response" + numberLineText + "'>" + "</span>" + "</br>").scrollBottom();
                     typed = new Typed('#response' + numberLineText, {
                         strings: ["GrandPYBot : " + randomResponse],
                         typeSpeed: 40,
@@ -59,6 +59,7 @@ $(function () {
                             finishGrandPyWrite = true;
                             var responseQuestion = $('#responseQuestion');
                             $('#googlemaps').show('slow');
+                            responseQuestion.empty();
                             responseQuestion.show('slow');
                             responseQuestion.text(response.wikipedia_result);
                             map.setZoom(16);

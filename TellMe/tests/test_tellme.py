@@ -11,7 +11,7 @@ class TestApp:
         assert parser.parser_word("c'est un test") == "test"
 
     def test_question(self,client):
-        mimetype = 'application/json'
+        mimetype = 'text/html'
         headers = {
             'Content-Type': mimetype,
             'Accept': mimetype
