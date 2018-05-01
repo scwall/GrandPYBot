@@ -1,5 +1,5 @@
 var finishGrandPyWrite = false;
-var numberLineText = 0;
+var numberLineText = 1;
 $(function () {
     $.fn.scrollBottom = function () {
         return $(this).scrollTop($(this)[0].scrollHeight);
@@ -40,7 +40,7 @@ $(function () {
                 }
 
             });
-            chatbox.append("<span id='tempory" + numberLineText + "'>" + "GrandPYBot : En train de réfléchir " + "<img src='../static/assets/img/Eclipse-1s-200px.svg' height='30' width='30'>" + "</span>").scrollBottom().delay(3000).queue(function () {
+            chatbox.append("<span id='tempory" + numberLineText + "'>" + "<img src='../static/assets/img/dimitri.png' height='30' width='30'>" + "GrandPYBot : En train de réfléchir " + "<img src='../static/assets/img/Eclipse-1s-200px.svg' height='30' width='30'>" + "</span>").scrollBottom().delay(3000).queue(function () {
                 $('#tempory' + numberLineText).last().remove();
                 if (response.correct_question === true) {
                     chatbox.append("<span id='response" + numberLineText + "'>" + "</span>" + "</br>").scrollBottom();
@@ -96,7 +96,7 @@ $(function () {
 
         }
     });
-    console.log("ready ask question");
+    console.log("Ready ask question");
 
 });
 

@@ -10,10 +10,9 @@ function playSound() {
 }
 
 $(window).on('load', function () {
-    
+    $("#chatBox").append("<img src='../static/assets/img/dimitri.png' height='30' width='30'>" + "<span id='response" + 0 + "'>" + "</span>" + "</br>").scrollBottom();
 
 
-   
     $.ajax({
         url: 'loadsite',
         type: 'POST',
@@ -23,8 +22,8 @@ $(window).on('load', function () {
         success: function (data) {
             randomResponse = data.randomResponse;
             randomError = data.randomError;
-            typed = new Typed('#chatBox', {
-                strings: ['GrandPyBot : Bienvenue cher utilisateur', 'GrandPyBot : ' + data.randomHello + '</br>'],
+            typed = new Typed('#response0', {
+                strings: ['GrandPyBot : Bienvenue cher utilisateur', 'GrandPyBot : ' + data.randomHello],
                 typeSpeed: 40,
                 backSpeed: 30,
                 backDelay: 900,

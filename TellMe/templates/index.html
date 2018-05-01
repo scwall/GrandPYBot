@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GrandPYBot</title>
-    <link rel="stylesheet" href="../static/assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aclonica">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Marcellus">
     <link rel="stylesheet" href="../static/assets/css/Contact-Form-Clean.css">
@@ -25,35 +25,34 @@
                     class="img-fluid jello animated" src="../static/assets/img/logo-transparent.png"
                     style="max-width:80%;"></div>
             <div class="col-md-6 offset-xl-1 d-none d-md-block d-lg-block d-xl-block jello animated">
-                <h1 class="bounce animated" style="font-family:Marcellus, serif;margin-top:80px;"><strong><em>Je vais te
-                    raconter une histoire...</em></strong></h1>
+                <h1 style="font-family:Marcellus, serif;margin-top:80px;"><strong><em>Je vais te raconter une
+                    histoire...</em></strong></h1>
             </div>
         </div>
     </div>
 </header>
 <section style="margin-top:45px;">
-        <div class="container">
-            <form id="questionpapy">
-                <div class="form-group">
-                    <div class="form-row">
-                        <div class="col-lg-7 offset-lg-3" style="min-height:40px;">
-                            <div class="jello animated" id="chatBox"
-                                 style="background-color:rgba(255,255,255,0.35);height:115px;margin-bottom:40px;margin-left:18px;"></div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-lg-4 offset-lg-4"><input class="form-control jello animated" type="text"
-                                                                 autofocus="" id="question"
-                                                                 style="background-color:rgba(255,255,255,0.48);"></div>
-                        <div class="col">
-                            <button class="btn btn-primary jello animated" type="submit"
-                                    style="background-color:rgba(122,65,24,0.79);font-family:Marcellus, serif;">Ask me
-                            </button>
-                        </div>
+    <div class="container">
+        <form id="questionpapy">
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-lg-7 offset-lg-3" style="min-height:40px;">
+                        <div id="chatBox"
+                             style="background-color:rgba(255,255,255,0.35);height:115px;margin-bottom:40px;margin-left:18px;"></div>
                     </div>
                 </div>
-            </form>
-        </div>
+                <div class="form-row">
+                    <div class="col-lg-4 offset-lg-4"><input class="form-control" type="text" autofocus="" id="question"
+                                                             style="background-color:rgba(255,255,255,0.48);"></div>
+                    <div class="col">
+                        <button class="btn btn-primary" type="submit"
+                                style="background-color:rgba(122,65,24,0.79);font-family:Marcellus, serif;">Raconte-moi
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </section>
 <section>
     <div class="container">
@@ -85,14 +84,13 @@
         </div>
     </div>
 </footer>
-<script src="../static/assets/js/jquery.min.js"></script>
-<script src="../static/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
 <script src="../static/assets/js/typed.min.js"></script>
-<script src="../static/assets/js/loadsite.js"></script>
-<script src="../static/assets/js/post.question.grandpy.js"></script>
-<script src="../static/assets/js/googlemaps.js"></script>
+<script src="../static/assets/js/loadsite.min.js"></script>
+<script src="../static/assets/js/post.question.grandpy.min.js"></script>
+<script src="../static/assets/js/googlemaps.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js"></script>
-<script src="../static/assets/js/test.js"></script>
 </body>
 
 </html>
