@@ -12,7 +12,7 @@ def create_app(config):
     return app
 
 
-tellme = TellMe("AIzaSyC_0sMqi7mbdoquIuAX8_GpyRuGrNu88qI")
+tellme = TellMe("AIzaSyADXfEDu54gj7ROiz-brEVl08RG-pydCkI")
 app = create_app('config')
 app.app_context().push()
 
