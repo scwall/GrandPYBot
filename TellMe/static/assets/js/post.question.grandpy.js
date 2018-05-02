@@ -12,7 +12,8 @@ $(function () {
         var text = $('#question').val();
         if (finishGrandPyWrite === true) {
             var chatbox = $("#chatBox");
-            chatbox.append("<img src='../static/assets/img/avatar.png' height='30' width='30'>" + "<span id='question" + numberLineText + "'>" + "</span>" + "</br>").scrollBottom();
+            chatbox.append("<img src='../static/assets/img/avatar.png' height='30' width='30'>" + "<span id='question" + numberLineText + "'>" + "</span>").scrollBottom();
+
             $('#question' + numberLineText).append("Moi : " + text + "</br>");
             finishGrandPyWrite = false;
             $.ajax({
@@ -43,9 +44,9 @@ $(function () {
             chatbox.append("<span id='tempory" + numberLineText + "'>" + "<img src='../static/assets/img/dimitri.png' height='30' width='30'>" + "GrandPYBot : En train de réfléchir " + "<img src='../static/assets/img/Eclipse-1s-200px.svg' height='30' width='30'>" + "</span>").scrollBottom().delay(3000).queue(function () {
                 $('#tempory' + numberLineText).last().remove();
                 if (response.correct_question === true) {
-                    chatbox.append("<img src='../static/assets/img/dimitri.png' height='30' width='30'>" + "<span id='response" + numberLineText + "'>" + "</span>" + "</br>").scrollBottom();
-                    typed = new Typed('#response' + numberLineText, {
-                        strings: ["GrandPYBot : " + randomResponse],
+                    chatbox.append("<img src='../static/assets/img/dimitri.png' height='30' width='30'>" + "<span  id='responseGoogleMaps" + numberLineText + "'>" + "</span>").scrollBottom();
+                    typed = new Typed('#responseGoogleMaps' + numberLineText, {
+                        strings: ["GrandPYBot : " + "Voici le lieu que j'ai trouvé" + "</br>"],
                         typeSpeed: 40,
                         backSpeed: 30,
                         backDelay: 900,
@@ -56,24 +57,45 @@ $(function () {
                             playSound();
                         },
                         onComplete: function (array, self) {
-                            finishGrandPyWrite = true;
+                            chatbox.scrollBottom();
                             var responseQuestion = $('#responseQuestion');
                             $('#googlemaps').show('slow');
-                            responseQuestion.empty();
-                            responseQuestion.show('slow');
-                            responseQuestion.text(response.wikipedia_result);
                             map.setZoom(16);
                             map.setCenter({lat: response.googlemaps_result.lat, lng: response.googlemaps_result.lng});
-                            chatbox.clearQueue().finish();
-                            numberLineText += 1;
+                            chatbox.append("<img src='../static/assets/img/dimitri.png' height='30' width='30'>" + "<span  id='responseWikipedia" + numberLineText + "'>" + "</span>").scrollBottom()
+                            typed = new Typed('#responseWikipedia' + numberLineText, {
+                                strings: ["GrandPYBot : " + randomResponse + "</br>"],
+                                typeSpeed: 40,
+                                backSpeed: 30,
+                                backDelay: 900,
+                                startDelay: 1000,
+                                smartBackspace: true,
+                                showCursor: false,
+                                preStringTyped: function (array, self) {
+                                    playSound();
+                                },
+                                onComplete: function (array, self) {
+                                    chatbox.scrollBottom();
+                                    finishGrandPyWrite = true;
+                                    var responseQuestion = $('#responseQuestion');
+                                    $('#googlemaps').show('slow');
+                                    responseQuestion.empty();
+                                    responseQuestion.show('slow');
+                                    responseQuestion.text(response.wikipedia_result);
+                                    chatbox.clearQueue().finish();
+                                    numberLineText += 1;
+                                },
+                                loop: false
+                            });
                         },
                         loop: false
                     });
+
                 }
                 if (response.correct_question === false) {
-                    chatbox.append("<span id='response" + numberLineText + "'>" + "</span>" + "</br>").scrollBottom();
+                    chatbox.append("<img src='../static/assets/img/dimitri.png' height='30' width='30'>" + "<span id='response" + numberLineText + "'>" + "</span>" + "</br>").scrollBottom();
                     typed = new Typed('#response' + numberLineText, {
-                        strings: ["GrandPYBot : Je n'ai pas compris la question, peux tu répéter"],
+                        strings: ["GrandPYBot : " + randomError],
                         typeSpeed: 40,
                         backSpeed: 30,
                         backDelay: 900,

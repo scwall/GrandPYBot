@@ -5,3 +5,4 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'test_databases.d
 DEBUG = True
 TESTING = True
 LIVESERVER_PORT = 5001
+SQLALCHEMY_TRACK_MODIFICATIONS = False

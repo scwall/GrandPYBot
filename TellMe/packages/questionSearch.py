@@ -33,7 +33,6 @@ class TellMe:
         try:
             geocode_result = self.gmaps.geocode(self._question)
             self._googlemaps_geocode_result = geocode_result[0]['geometry']['location']
-            print(self._googlemaps_geocode_result)
         except:
             return False
 
@@ -47,7 +46,7 @@ class TellMe:
             coordinates=str(self._googlemaps_geocode_result['lat']) + "|" + str(
                 self._googlemaps_geocode_result['lng'])))
         reply = reply.json()
-        if next(iter(reply.keys())) == 'batchcomplete':
+        if 'query' is not reply.keys():
             reply = requests.get(self.wikipedia_link_get_long_range.format(
                 coordinates=str(self._googlemaps_geocode_result['lat']) + "|" + str(
                     self._googlemaps_geocode_result['lng'])))

@@ -9,8 +9,6 @@ $(document).ready(function () {
     }
 
     google.maps.event.addDomListener(window, 'load', initialize);
-    $.fn.scrollBottom = function () {
-        return $(this).scrollTop($(this)[0].scrollHeight);
-    };
+
 });
 

@@ -4,7 +4,7 @@ var keystrokeSound = new Audio('https://vocaroo.com/media_command.php?media=s1mh
 
 function playSound() {
     keystrokeSound.pause();
-    keystrokeSound.currentTime = 1;
+    keystrokeSound.currentTime = 0.20;
     keystrokeSound.play();
     firstOpenSite = false
 }

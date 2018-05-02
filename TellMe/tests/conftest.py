@@ -19,7 +19,9 @@ def app(monkeypatch):
             def json(self):
                 return self.response
 
-        fake_json = FakeJson(links[url])
+        fake_json = FakeJson(links['https://fr.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&list='
+                                   '&generator=geosearch&utf8=1&exsentences=4&exintro=1&explaintext=1&exsectionformat=raw&'
+                                   'ggscoord=0.0|0.0'])
         return fake_json
 
     def googlemaps_return(key):
@@ -33,7 +35,6 @@ def app(monkeypatch):
 
         fake_google_maps = FakeGoogleMaps(key)
         return fake_google_maps
-
     monkeypatch.setattr(googlemaps, 'Client', googlemaps_return)
     monkeypatch.setattr(requests, 'get', requests_return)
     app = create_app('TellMe.tests.config')
