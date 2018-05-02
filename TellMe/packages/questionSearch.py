@@ -1,3 +1,6 @@
+import datetime
+from typing import Optional, List
+
 import googlemaps
 import requests
 
@@ -25,22 +28,22 @@ class TellMe:
                                              "generator=geosearch&utf8=1&exsentences=4&exintro=1&explaintext=1" \
                                              "&ggscoord={coordinates}&ggsradius=10000&ggsglobe=earth"
 
-    """
-    Function that will allow the search of the location on googlemaps, 
-    if there is no information found it returns false
-    """
     def google_map(self):
+        """
+            Function that will allow the search of the location on googlemaps,
+            if there is no information found it returns false
+        """
         try:
             geocode_result = self.gmaps.geocode(self._question)
             self._googlemaps_geocode_result = geocode_result[0]['geometry']['location']
         except:
             return False
 
-    """
-    Function that will search on wikipedia according to the coordinates received from googlemaps
-    If the coordinates do not give a history on the place then it is returned on a longer search range
-    """
     def wikipedia(self):
+        """
+            Function that will search on wikipedia according to the coordinates received from googlemaps
+            If the coordinates do not give a history on the place then it is returned on a longer search range
+        """
 
         reply = requests.get(self.wikipedia_link_get.format(
             coordinates=str(self._googlemaps_geocode_result['lat']) + "|" + str(
@@ -65,3 +68,9 @@ class TellMe:
 
     def get_wikipedia_result(self):
         return self._wikipedia_result
+
+    def get_last_version_groups_for_content_cycle(cls, content_cycle_id: int) -> int:
+        pass
+
+    def patate(self):
+        test = self.get_last_version_groups_for_content_cycle("test")
