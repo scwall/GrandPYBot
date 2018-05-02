@@ -4,6 +4,11 @@ import requests
 
 from TellMe.views import create_app
 
+"""
+Patch requests and googlemaps functions to return a value even 
+if there is no connection to the external service
+"""
+
 
 @pytest.fixture(autouse=True)
 def app(monkeypatch):
@@ -35,6 +40,7 @@ def app(monkeypatch):
 
         fake_google_maps = FakeGoogleMaps(key)
         return fake_google_maps
+
     monkeypatch.setattr(googlemaps, 'Client', googlemaps_return)
     monkeypatch.setattr(requests, 'get', requests_return)
     app = create_app('TellMe.tests.config')

@@ -30,6 +30,7 @@ def create_app(config):
     def index():
         return render_template('index.html')
 
+    # Link for receiving the ajax answer to the question to grand py bot
     @app.route('/question', methods=["POST"])
     def question():
         response = dict()
@@ -45,6 +46,7 @@ def create_app(config):
             response['wikipedia_result'] = tellme.get_wikipedia_result()
         return jsonify(response)
 
+    #When loading the site references the database with custom phrases
     @app.route('/loadsite', methods=["POST"])
     def loadsite():
         load_site = object()
