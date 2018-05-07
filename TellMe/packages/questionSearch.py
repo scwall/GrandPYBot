@@ -13,14 +13,14 @@ The construction of the object will take as parameter in the constructor the goo
 """
 
 class QuestionSearch:
-    def __init__(self, googlemapapikey):
+    def __init__(self, googlemapapikey,languageparser):
         self._googlemaps_result = dict()
         self._googlemaps_formatted_address = str()
         self._googlemaps_geocode_result = dict()
         self._wikipedia_result = dict()
         self._question = str()
         self.gmaps = googlemaps.Client(key=googlemapapikey)
-        self.parser = Parser(language='fr')
+        self.parser = Parser(language=languageparser)
         self.wikipedia_link_get = "https://fr.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&" \
                                   "list=&generator=geosearch&utf8=1&exsentences=4&exintro=1&explaintext=1&" \
                                   "exsectionformat=raw&ggscoord={coordinates}"

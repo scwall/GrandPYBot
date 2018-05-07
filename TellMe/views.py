@@ -9,7 +9,7 @@ def create_app(config):
     app = Flask(__name__)
     app.config.from_object(config)
     models.db.init_app(app)
-    tellme = QuestionSearch(app.config['GOOGLEMAPS'])
+    tellme = QuestionSearch(app.config['GOOGLEMAPS'],app.config['PARSER_LANGUAGE'])
     @app.cli.command()
     def init_db():
         models.db.drop_all()
