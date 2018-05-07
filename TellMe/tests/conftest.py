@@ -54,7 +54,7 @@ def app(monkeypatch):
 
 
 @pytest.fixture()
-def db(app):
+def tellme(app):
     print('test')
     models.db.drop_all()
     models.db.create_all()

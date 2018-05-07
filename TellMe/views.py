@@ -9,7 +9,7 @@ def create_app(config):
     app = Flask(__name__)
     app.config.from_object(config)
     models.db.init_app(app)
-    tellme = QuestionSearch(app.config['GOOGLEMAPS'],app.config['PARSER_LANGUAGE'])
+    question_search = QuestionSearch(app.config['GOOGLEMAPS'],app.config['PARSER_LANGUAGE'])
     @app.cli.command()
     def init_db():
         models.db.drop_all()
@@ -34,15 +34,15 @@ def create_app(config):
     def question():
         response = dict()
         question = request.get_json().get('grandfather_question')
-        tellme.set_question(question)
-        question_is_correct = tellme.google_map()
+        question_search.set_question(question)
+        question_is_correct = question_search.google_map()
         if question_is_correct is False:
             response['correct_question'] = False
         else:
-            tellme.wikipedia()
+            question_search.wikipedia()
             response['correct_question'] = True
-            response['googlemaps_result'] = tellme.get_googlemaps_geocode_result()
-            response['wikipedia_result'] = tellme.get_wikipedia_result()
+            response['googlemaps_result'] = question_search.get_googlemaps_geocode_result()
+            response['wikipedia_result'] = question_search.get_wikipedia_result()
         return jsonify(response)
 
     #When loading the site references the database with custom phrases

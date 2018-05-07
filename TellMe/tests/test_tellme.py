@@ -44,7 +44,7 @@ class TestApp:
 
     def test_class_TellMe(self):
         question = "openclassrooms"
-        tellme = QuestionSearch("AIzaSyC_0sMqi7mbdoquIuAX8_GpyRuGrNu88qI")
+        tellme = QuestionSearch("AIzaSyC_0sMqi7mbdoquIuAX8_GpyRuGrNu88qI","fr")
         tellme.set_question(question)
         tellme.google_map()
         tellme.wikipedia()
