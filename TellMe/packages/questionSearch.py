@@ -12,7 +12,7 @@ the coordinates can then be sent to wikipedia for a search on an area known to i
 The construction of the object will take as parameter in the constructor the googlemaps key
 """
 
-class TellMe:
+class QuestionSearch:
     def __init__(self, googlemapapikey):
         self._googlemaps_result = dict()
         self._googlemaps_formatted_address = str()
@@ -68,9 +68,3 @@ class TellMe:
 
     def get_wikipedia_result(self):
         return self._wikipedia_result
-
-    def get_last_version_groups_for_content_cycle(cls, content_cycle_id: int) -> int:
-        pass
-
-    def patate(self):
-        test = self.get_last_version_groups_for_content_cycle("test")

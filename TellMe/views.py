@@ -1,16 +1,15 @@
 from flask import Flask, jsonify, request, render_template
-from TellMe.packages.questionSearch import TellMe
+from TellMe.packages.questionSearch import QuestionSearch
 from TellMe import models
 import logging as lg
 import random
 
 
 def create_app(config):
-    tellme = TellMe("AIzaSyADXfEDu54gj7ROiz-brEVl08RG-pydCkI")
     app = Flask(__name__)
     app.config.from_object(config)
     models.db.init_app(app)
-
+    tellme = QuestionSearch(app.config['GOOGLEMAPS'])
     @app.cli.command()
     def init_db():
         models.db.drop_all()
