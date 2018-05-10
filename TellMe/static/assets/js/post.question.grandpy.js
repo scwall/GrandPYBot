@@ -1,3 +1,4 @@
+// if grand py write
 var finishGrandPyWrite = false;
 var numberLineText = 1;
 $(function () {
@@ -10,12 +11,14 @@ $(function () {
         e.preventDefault();
         var response;
         var text = $('#question').val();
+        // if "grand py bot" no longer writes
         if (finishGrandPyWrite === true) {
             var chatbox = $("#chatBox");
             chatbox.append("<img src='../static/assets/img/avatar.png' height='30' width='30'>" + "<span id='question" + numberLineText + "'>" + "</span>").scrollBottom();
 
             $('#question' + numberLineText).append("Moi : " + text + "</br>");
             finishGrandPyWrite = false;
+            // Send the question by ajax to the server
             $.ajax({
                 url: 'question',
                 type: 'POST',

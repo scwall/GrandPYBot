@@ -53,3 +53,6 @@ This project is licensed under the GNU License
 
 Acknowledgments
 I would like to thank my teacher for his advice,my classmates, my wife for her patient, Thanks to my friends for supporting me since I live in a cave 
+
+link Trello: https://trello.com/b/Nttx9Nao/grandpy-bot
+link Heroku: 

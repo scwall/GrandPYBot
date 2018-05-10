@@ -1,3 +1,5 @@
+//initialize googlemaps
+
 var map;
 $(document).ready(function () {
 
