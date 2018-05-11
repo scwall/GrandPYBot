@@ -65,6 +65,7 @@ $(function () {
                             $('#googlemaps').show('slow');
                             map.setZoom(16);
                             map.setCenter({lat: response.googlemaps_result.lat, lng: response.googlemaps_result.lng});
+                            marker.setPosition( new google.maps.LatLng( response.googlemaps_result.lat,response.googlemaps_result.lng) );
                             chatbox.append("<img src='../static/assets/img/dimitri.png' height='30' width='30'>" + "<span  id='responseWikipedia" + numberLineText + "'>" + "</span>").scrollBottom()
                             typed = new Typed('#responseWikipedia' + numberLineText, {
                                 strings: ["GrandPYBot : " + randomResponse + "</br>"],
