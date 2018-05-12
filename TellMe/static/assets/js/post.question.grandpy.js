@@ -14,9 +14,7 @@ $(function () {
         // if "grand py bot" no longer writes
         if (finishGrandPyWrite === true) {
             var chatbox = $("#chatBox");
-            chatbox.append("<img src='../static/assets/img/avatar.png' height='30' width='30'>" + "<span id='question" + numberLineText + "'>" + "</span>").scrollBottom();
-
-            $('#question' + numberLineText).append("Moi : " + text + "</br>");
+            chatbox.append("<img src='../static/assets/img/avatar.png' height='30' width='30'>" + "<span id='question" + numberLineText + "'>" + "Moi : " + text + "</br>" + "</span>").scrollBottom();
             finishGrandPyWrite = false;
             // Send the question by ajax to the server
             $.ajax({
@@ -44,7 +42,7 @@ $(function () {
                 }
 
             });
-            chatbox.append("<span id='tempory" + numberLineText + "'>" + "<img src='../static/assets/img/dimitri.png' height='30' width='30'>" + "GrandPYBot : En train de réfléchir " + "<img src='../static/assets/img/Eclipse-1s-200px.svg' height='30' width='30'>" + "</span>").scrollBottom().delay(3000).queue(function () {
+            chatbox.append("<span id='tempory" + numberLineText + "'>" + "<img src='../static/assets/img/dimitri.png' height='30' width='30'>" + "GrandPYBot : En train de réfléchir " + "<img src='../static/assets/img/Eclipse-1s-200px.svg' height='30' width='30'>" + "</span>").scrollBottom().delay(5000).queue(function () {
                 $('#tempory' + numberLineText).last().remove();
                 if (response.correct_question === true) {
                     chatbox.append("<img src='../static/assets/img/dimitri.png' height='30' width='30'>" + "<span  id='responseGoogleMaps" + numberLineText + "'>" + "</span>").scrollBottom();
