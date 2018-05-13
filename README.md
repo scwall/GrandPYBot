@@ -15,8 +15,8 @@ Getting Started
 Installing
 ------------------
 To install python: https://www.python.org/downloads/
-To install pip:
 
+To install pip:
 ```
 [~]$ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 [~]$ python get-pip.py
